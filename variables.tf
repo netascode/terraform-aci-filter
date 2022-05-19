@@ -41,7 +41,7 @@ variable "description" {
 }
 
 variable "entries" {
-  description = "List of filter entries. Choices `ethertype`: `unspecified`, `ipv4`, `trill`, `arp`, `ipv6`, `mpls_ucast`, `mac_security`, `fcoe`, `ip`. Default value `ethertype`: `ip`. Allowed values `protocol`: `unspecified`, `icmp`, `igmp`, `tcp`, `egp`, `igp`, `udp`, `icmpv6`, `eigrp`, `ospfigp`, `pim`, `l2tp` or a number between 0 and 255. Default value `protocol`: `tcp`. Allowed values `source_from_port`, `source_to_port`, `destination_from_port`, `destination_to_port`: `unspecified`, `ftpData`, `smtp`, `dns`, `http`, `pop3`, `https`, `rtsp` or a number between 0 and 65535. Default value `source_from_port`, `source_to_port`, `destination_from_port`, `destination_to_port`: `unspecified`. Default value `stateful`: false."
+  description = "List of filter entries. Choices `ethertype`: `unspecified`, `ipv4`, `trill`, `arp`, `ipv6`, `mpls_ucast`, `mac_security`, `fcoe`, `ip`. Default value `ethertype`: `ip`. Allowed values `protocol`: `unspecified`, `icmp`, `igmp`, `tcp`, `egp`, `igp`, `udp`, `icmpv6`, `eigrp`, `ospfigp`, `pim`, `l2tp` or a number between 0 and 255. Default value `protocol`: `tcp`. Allowed values `source_from_port`, `source_to_port`, `destination_from_port`, `destination_to_port`: `unspecified`, `dns`, `ftpData`, `http`, `https`, `pop3`, `rtsp`, `smtp`, `ssh` or a number between 0 and 65535. Default value `source_from_port`, `source_to_port`, `destination_from_port`, `destination_to_port`: `unspecified`. Default value `stateful`: false."
   type = list(object({
     name                  = string
     alias                 = optional(string)
@@ -93,29 +93,29 @@ variable "entries" {
 
   validation {
     condition = alltrue([
-      for e in var.entries : e.source_from_port == null || try(contains(["unspecified", "ftpData", "smtp", "dns", "http", "pop3", "https", "rtsp"], e.source_from_port), false) || try(tonumber(e.source_from_port) >= 0 && tonumber(e.source_from_port) <= 65535, false)
+      for e in var.entries : e.source_from_port == null || try(contains(["unspecified", "dns", "ftpData", "http", "https", "pop3", "rtsp", "smtp", "ssh"], e.source_from_port), false) || try(tonumber(e.source_from_port) >= 0 && tonumber(e.source_from_port) <= 65535, false)
     ])
-    error_message = "`source_from_port`: Allowed values are `unspecified`, `ftpData`, `smtp`, `dns`, `http`, `pop3`, `https`, `rtsp` or a number between 0 and 65535."
+    error_message = "`source_from_port`: Allowed values are `unspecified`, `dns`, `ftpData`, `http`, `https`, `pop3`, `rtsp`, `smtp`, `ssh` or a number between 0 and 65535."
   }
 
   validation {
     condition = alltrue([
-      for e in var.entries : e.source_to_port == null || try(contains(["unspecified", "ftpData", "smtp", "dns", "http", "pop3", "https", "rtsp"], e.source_to_port), false) || try(tonumber(e.source_to_port) >= 0 && tonumber(e.source_to_port) <= 65535, false)
+      for e in var.entries : e.source_to_port == null || try(contains(["unspecified", "dns", "ftpData", "http", "https", "pop3", "rtsp", "smtp", "ssh"], e.source_to_port), false) || try(tonumber(e.source_to_port) >= 0 && tonumber(e.source_to_port) <= 65535, false)
     ])
-    error_message = "`source_to_port`: Allowed values are `unspecified`, `ftpData`, `smtp`, `dns`, `http`, `pop3`, `https`, `rtsp` or a number between 0 and 65535."
+    error_message = "`source_to_port`: Allowed values are `unspecified`, `dns`, `ftpData`, `http`, `https`, `pop3`, `rtsp`, `smtp`, `ssh` or a number between 0 and 65535."
   }
 
   validation {
     condition = alltrue([
-      for e in var.entries : e.destination_from_port == null || try(contains(["unspecified", "ftpData", "smtp", "dns", "http", "pop3", "https", "rtsp"], e.destination_from_port), false) || try(tonumber(e.destination_from_port) >= 0 && tonumber(e.destination_from_port) <= 65535, false)
+      for e in var.entries : e.destination_from_port == null || try(contains(["unspecified", "dns", "ftpData", "http", "https", "pop3", "rtsp", "smtp", "ssh"], e.destination_from_port), false) || try(tonumber(e.destination_from_port) >= 0 && tonumber(e.destination_from_port) <= 65535, false)
     ])
-    error_message = "`destination_from_port`: Allowed values are `unspecified`, `ftpData`, `smtp`, `dns`, `http`, `pop3`, `https`, `rtsp` or a number between 0 and 65535."
+    error_message = "`destination_from_port`: Allowed values are `unspecified`, `dns`, `ftpData`, `http`, `https`, `pop3`, `rtsp`, `smtp`, `ssh` or a number between 0 and 65535."
   }
 
   validation {
     condition = alltrue([
-      for e in var.entries : e.destination_to_port == null || try(contains(["unspecified", "ftpData", "smtp", "dns", "http", "pop3", "https", "rtsp"], e.destination_to_port), false) || try(tonumber(e.destination_to_port) >= 0 && tonumber(e.destination_to_port) <= 65535, false)
+      for e in var.entries : e.destination_to_port == null || try(contains(["unspecified", "dns", "ftpData", "http", "https", "pop3", "rtsp", "smtp", "ssh"], e.destination_to_port), false) || try(tonumber(e.destination_to_port) >= 0 && tonumber(e.destination_to_port) <= 65535, false)
     ])
-    error_message = "`destination_to_port`: Allowed values are `unspecified`, `ftpData`, `smtp`, `dns`, `http`, `pop3`, `https`, `rtsp` or a number between 0 and 65535."
+    error_message = "`destination_to_port`: Allowed values are `unspecified`, `dns`, `ftpData`, `http`, `https`, `pop3`, `rtsp`, `smtp`, `ssh` or a number between 0 and 65535."
   }
 }
