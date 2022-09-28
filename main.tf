@@ -14,14 +14,14 @@ resource "aci_rest_managed" "vzEntry" {
   class_name = "vzEntry"
   content = {
     name      = each.value.name
-    nameAlias = each.value.alias != null ? each.value.alias : ""
-    descr     = each.value.description != null ? each.value.description : ""
-    etherT    = each.value.ethertype != null ? each.value.ethertype : "ip"
-    prot      = contains(["ip", "ipv4", "ipv6", null], each.value.ethertype) ? (each.value.protocol != null ? each.value.protocol : "tcp") : null
-    sFromPort = each.value.source_from_port != null ? each.value.source_from_port : "unspecified"
-    sToPort   = each.value.source_to_port != null ? each.value.source_to_port : "unspecified"
-    dFromPort = each.value.destination_from_port != null ? each.value.destination_from_port : "unspecified"
-    dToPort   = each.value.destination_to_port != null ? each.value.destination_to_port : "unspecified"
+    nameAlias = each.value.alias
+    descr     = each.value.description
+    etherT    = each.value.ethertype
+    prot      = contains(["ip", "ipv4", "ipv6", null], each.value.ethertype) ? each.value.protocol : null
+    sFromPort = each.value.source_from_port
+    sToPort   = each.value.source_to_port
+    dFromPort = each.value.destination_from_port
+    dToPort   = each.value.destination_to_port
     stateful  = each.value.stateful == true ? "yes" : "no"
   }
 }

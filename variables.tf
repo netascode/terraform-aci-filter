@@ -44,15 +44,15 @@ variable "entries" {
   description = "List of filter entries. Choices `ethertype`: `unspecified`, `ipv4`, `trill`, `arp`, `ipv6`, `mpls_ucast`, `mac_security`, `fcoe`, `ip`. Default value `ethertype`: `ip`. Allowed values `protocol`: `unspecified`, `icmp`, `igmp`, `tcp`, `egp`, `igp`, `udp`, `icmpv6`, `eigrp`, `ospfigp`, `pim`, `l2tp` or a number between 0 and 255. Default value `protocol`: `tcp`. Allowed values `source_from_port`, `source_to_port`, `destination_from_port`, `destination_to_port`: `unspecified`, `dns`, `ftpData`, `http`, `https`, `pop3`, `rtsp`, `smtp`, `ssh` or a number between 0 and 65535. Default value `source_from_port`, `source_to_port`, `destination_from_port`, `destination_to_port`: `unspecified`. Default value `stateful`: false."
   type = list(object({
     name                  = string
-    alias                 = optional(string)
-    description           = optional(string)
-    ethertype             = optional(string)
-    protocol              = optional(string)
-    source_from_port      = optional(string)
-    source_to_port        = optional(string)
-    destination_from_port = optional(string)
-    destination_to_port   = optional(string)
-    stateful              = optional(bool)
+    alias                 = optional(string, "")
+    description           = optional(string, "")
+    ethertype             = optional(string, "ip")
+    protocol              = optional(string, "tcp")
+    source_from_port      = optional(string, "unspecified")
+    source_to_port        = optional(string, "unspecified")
+    destination_from_port = optional(string, "unspecified")
+    destination_to_port   = optional(string, "unspecified")
+    stateful              = optional(bool, false)
   }))
   default = []
 
