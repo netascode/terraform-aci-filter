@@ -1,4 +1,4 @@
-## 0.2.1 (unreleased)
+## 0.2.1
 
 - Normalize `protocol` values and names
 - Normalize `source_from_port` values and names
