@@ -1,3 +1,11 @@
+## 0.2.1 (unreleased)
+
+- Normalize `protocol` values and names
+- Normalize `source_from_port` values and names
+- Normalize `source_to_port` values and names
+- Normalize `destination_from_port` values and names
+- Normalize `destination_to_port` values and names
+
 ## 0.2.0
 
 - Update to support new Terraform 1.3 `optional` syntax

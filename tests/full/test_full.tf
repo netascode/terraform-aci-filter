@@ -31,10 +31,10 @@ module "main" {
     description           = "Entry Description"
     ethertype             = "ip"
     protocol              = "tcp"
-    source_from_port      = "123"
+    source_from_port      = "22"
     source_to_port        = "124"
     destination_from_port = "234"
-    destination_to_port   = "235"
+    destination_to_port   = "554"
     stateful              = true
   }]
 }
@@ -109,7 +109,7 @@ resource "test_assertions" "vzEntry" {
   equal "sFromPort" {
     description = "sFromPort"
     got         = data.aci_rest_managed.vzEntry.content.sFromPort
-    want        = "123"
+    want        = "ssh"
   }
 
   equal "sToPort" {
@@ -127,7 +127,7 @@ resource "test_assertions" "vzEntry" {
   equal "dToPort" {
     description = "dToPort"
     got         = data.aci_rest_managed.vzEntry.content.dToPort
-    want        = "235"
+    want        = "rtsp"
   }
 
   equal "stateful" {
